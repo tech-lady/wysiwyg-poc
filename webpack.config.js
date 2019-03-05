@@ -1,3 +1,4 @@
+const path = require("path");
 var webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
@@ -62,6 +63,13 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules']
+  },
+  devServer: {
+    port: 3000,
+    open: true,
+    proxy: {
+      "/api": "http://localhost:8080"
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({
