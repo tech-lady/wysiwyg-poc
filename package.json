@@ -36,10 +36,12 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "bluebird": "^3.5.3",
+    "canvas": "^2.3.1",
     "concurrently": "^4.1.0",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
     "react-froala-wysiwyg": "^2.9.3",
-    "style-loader": "^0.23.1",
-    "text-to-image": "^1.2.0"
+    "style-loader": "^0.23.1"
   }
 }

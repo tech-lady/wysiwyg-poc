@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as $ from 'jquery';
-import './style.css';
 
 
 // Require Editor JS files.
@@ -19,18 +18,24 @@ import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
 
 import Input from "../presentational/Input.jsx";
 
-$('[data-component=richtext-field]').froalaEditor();
 
 class EditorContainer extends Component {
   constructor() {
     super();
     this.state = {
       seo_title: "",
-      model: 'Example text',
+      models: ['Example text'],
+      numberOfPages: 1,  
+      configs : {
+        charCounterCount: false,
+        heightMax: "500px",
+        documentReady: true
+      },
     };
     this.handleModelChange = this.handleModelChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.convertToImage = this.convertToImage.bind(this);
+    this.addNewPage = this.addNewPage.bind(this);
   }
 
   convertToImage() {
@@ -41,7 +46,7 @@ class EditorContainer extends Component {
       },
       method: 'POST',
       body: JSON.stringify({
-          text: this.state.model,
+          text: this.state.models.join('\n'),
       })
   })
     .then(function(response) {
@@ -60,40 +65,59 @@ class EditorContainer extends Component {
     this.setState({ [event.target.id]: event.target.value });
   }
 
-  handleModelChange(model) {
-    this.setState({
-      model: model
+  handleModelChange(i, model) {
+    let newModel = this.state.models;
+    newModel[i] = model; 
+    this.setState({ models: newModel });
+  }
+
+  addNewPage() {
+    this.setState({ 
+      numberOfPages: ++this.state.numberOfPages,
+      models: [...this.state.models, "Example Text"]
     });
+  }
+
+  renderPages() {
+    let i = 0;
+    let pages = [];
+
+    for(; i < this.state.numberOfPages; i++) {
+      pages.push(<FroalaEditor
+      key={i}
+      tag='textarea'
+      className='editor-height'
+      config={this.state.configs}
+      model={this.state.models[i]}
+      onModelChange={this.handleModelChange.bind(this, i)}
+        />)
+    }
+    
+    return pages;
   }
 
   render() {
     const { seo_title } = this.state;
     return (
       <div>
-        <form id="article-form">
-          <Input
-            text="Title:"
-            label="seo_title"
-            type="text"
-            id="seo_title"
-            value={seo_title}
-            handleChange={this.handleChange}
-          />
-        </form>
-        <button onClick={this.convertToImage}>Convert</button>
-
-        <FroalaEditor
-          tag='textarea'
-          className='editor-height'
-          config={this.config}
-          model={this.state.model}
-          onModelChange={this.handleModelChange}
+          <form id="article-form">
+            <Input
+              text="Title:"
+              label="seo_title"
+              type="text"
+              id="seo_title"
+              value={seo_title}
+              handleChange={this.handleChange}
             />
-      <div>
-        <FroalaEditorImg
-          config={this.config}
-            />
-      </div>
+          </form>
+          <button onClick={this.convertToImage}>Convert</button>
+          <div id="editor">
+            { this.renderPages() }
+          </div>
+        <button onClick={this.addNewPage}>Add Page</button>
+           <FroalaEditorImg
+            config={this.config}
+              />
       </div>
     );
   }

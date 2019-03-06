@@ -1,4 +1,4 @@
-const textToImage = require('text-to-image');
+const textToImage = require('./utils/textToImage');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -12,7 +12,10 @@ app.get('/api/hello', (req, res) => {
 
 app.post('/api/image', (req, res) => {
     const text = req.body.text;
-    textToImage.generate(text).then(function (dataUri) {
+    console.log("pp:: ", text);
+    textToImage.generate(text, {
+      maxWidth: 800
+    }).then(function (dataUri) {
       res.json({ data: dataUri });
     });
 });
