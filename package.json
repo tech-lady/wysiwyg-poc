@@ -36,6 +36,8 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
     "bluebird": "^3.5.3",
     "canvas": "^2.3.1",
     "concurrently": "^4.1.0",
