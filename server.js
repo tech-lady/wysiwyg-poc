@@ -12,7 +12,6 @@ app.get('/api/hello', (req, res) => {
 
 app.post('/api/image', (req, res) => {
     const text = req.body.text;
-    console.log("pp:: ", text);
     textToImage.generate(text, {
       maxWidth: 800
     }).then(function (dataUri) {

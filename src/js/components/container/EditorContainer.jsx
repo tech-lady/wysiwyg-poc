@@ -28,7 +28,6 @@ class EditorContainer extends Component {
       numberOfPages: 1,  
       configs : {
         charCounterCount: false,
-        heightMax: "500px",
         documentReady: true
       },
     };
