@@ -1,3 +1,4 @@
+const path = require('path');
 const textToImage = require('./utils/textToImage');
 const express = require('express');
 const bodyParser = require('body-parser');
