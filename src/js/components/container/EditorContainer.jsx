@@ -28,7 +28,8 @@ class EditorContainer extends Component {
       numberOfPages: 1,  
       configs : {
         charCounterCount: false,
-        documentReady: true
+        documentReady: true,
+        heightMax: "500px"
       },
     };
     this.handleModelChange = this.handleModelChange.bind(this);

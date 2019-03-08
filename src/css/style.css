@@ -1,7 +1,7 @@
 .fr-box.fr-document .fr-wrapper .fr-element{
   width: auto;
   min-width: 0;
-  max-height: 26cm;
+  max-height: 16cm;
 }
 
 .fr-wrapper::after {
@@ -10,4 +10,8 @@
   display: block;
   content: "End of page, click on Add page button to continue!";
   height: 0;
+}
+.fr-box.fr-basic .fr-element {
+  overflow-x: visible;
+  height: 500px;
 }
