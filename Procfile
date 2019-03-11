@@ -1,1 +1,1 @@
-start: npm run build && npm run start:prod
+web: webpack --mode production && node server.js
