@@ -29,11 +29,11 @@ app.post('/api/world', (req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'src')));
+  app.use(express.static(path.join(__dirname, '/')));
   // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'src', 'index.html'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './src', 'index.html'));
   });
 }
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, '0.0.0.0', () => console.log(`Listening on port ${port}`));
